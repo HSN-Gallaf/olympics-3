@@ -14,7 +14,6 @@ function UpdateZaid() {
     const response = await axios.get(
       `${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`,
     );
-    console.log(response.data);
 
     setFormData(response.data);
   }
@@ -28,6 +27,7 @@ function UpdateZaid() {
     event.preventDefault();
     const createdHoot = await axios.put(
       `${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`,
+      formData,
     );
     navigate("/zaids");
   }
