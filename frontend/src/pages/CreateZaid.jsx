@@ -9,11 +9,14 @@ function CreateZaid() {
   });
 
   const navigate = useNavigate();
+
   function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
   async function handleSubmit(event) {
+    event.preventDefault();
+
     const createdZaid = await axios.post(
       `${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids`,
       formData,
