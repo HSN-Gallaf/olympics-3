@@ -1,65 +1,65 @@
-import axios from 'axios';
-import {useState, useEffect} from 'react'
-import { useNavigate, useParams } from 'react-router'
-
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
 
 function UpdateZaid() {
-
-    const [formData, setFormData] = useState({
-    name:"",
+  const [formData, setFormData] = useState({
+    name: "",
     zaidImage: "",
   });
 
-    const { zaidId } = useParams()
+  const { zaidId } = useParams();
 
-      async function getZaid(){
-    const response = await axios.get(`${import.meta.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`)
-    setFormData(response.data)
+  async function getZaid() {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`,
+    );
+    console.log(response.data);
+
+    setFormData(response.data);
   }
 
-
-  
-  const navigate = useNavigate()
-  function handleChange(event){
-    setFormData({...formData, [event.target.name]:event.target.value})
+  const navigate = useNavigate();
+  function handleChange(event) {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const createdHoot = await axios.put(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`,
+    );
+    navigate("/zaids");
+  }
 
-  
-    async function handleSubmit(event){
-      event.preventDefault()
-      const createdHoot = await axios.put(`${import.meta.env.VITE_BACK_END_SERVER_URL}/zaids/${zaidId}`)
-      navigate('/zaids')
-    }
-
-  useEffect(()=>{
-      getZaid()
-  },[])
+  useEffect(() => {
+    getZaid();
+  }, []);
 
   return (
     <div>
-        <h1>Update Zaid</h1>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Zaid Name: </label>
-            <input 
-            name="name"
-            type="text"
-            id="name"
-            onChange={handleChange}
-            value={formData.name}
-            />
-            <label htmlFor="zaidImage">Zaid Image: </label>
-            <input 
-            name="zaidImage"
-            type="text"
-            id="zaidImage"
-            onChange={handleChange}
-            value={formData.zaidImage}
-            />
-            <button>Create Zaid</button>
-          </form>
+      <h1>Update Zaid</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Zaid Name: </label>
+        <input
+          name="name"
+          type="text"
+          id="name"
+          onChange={handleChange}
+          value={formData.name}
+        />
+        <label htmlFor="zaidImage">Zaid Image: </label>
+        <input
+          name="zaidImage"
+          type="text"
+          id="zaidImage"
+          onChange={handleChange}
+          value={formData.zaidImage}
+        />
+        <button>Create Zaid</button>
+      </form>
     </div>
-  )
+  );
 }
 
-export default UpdateZaid
+export default UpdateZaid;
