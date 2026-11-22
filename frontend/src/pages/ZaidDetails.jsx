@@ -30,12 +30,14 @@ function ZaidDetails() {
     <div>
       <h1>Zaid Details</h1>
 
-      <>
-        <img className="zaid-img" src={zaid.zaidImage} alt={zaid.name} />
-        <h2>{zaid.name}</h2>
-        <button onClick={deleteZaid(zaidId)}>Delete Zaid</button>
-        <Link to={`/zaids/${zaidId}/edit`}>Edit Zaid</Link>
-      </>
+      {zaid ? (
+        <>
+          <img className="zaid-img" src={zaid.zaidImage} alt={zaid.name} />
+          <h2>{zaid.name}</h2>
+          <button onClick={deleteZaid(zaidId)}>Delete Zaid</button>
+          <Link to={`/zaids/${zaidId}/edit`}>Edit Zaid</Link>
+        </>
+      ) : null}
     </div>
   );
 }
