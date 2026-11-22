@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router";
 
 function ZaidDetails() {
-  const { zaid, setZaid } = useState(null);
+  const [zaid, setZaid] = useState(null);
 
   const { zaidId } = useParams();
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ function ZaidDetails() {
   useEffect(() => {
     getZaid();
   }, []);
+
   return (
     <div>
       <h1>Zaid Details</h1>
