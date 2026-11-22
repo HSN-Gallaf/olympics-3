@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:zaidId", async (req, res) => {
   const foundZaid = await Zaid.findById(req.params.zaidId);
-  res.status(200).jason(foundZaid);
+  res.status(200).json(foundZaid);
 });
 
 router.delete("/:zaidId", async (req, res) => {
